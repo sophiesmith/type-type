@@ -1,0 +1,92 @@
+.outer2 {
+	padding-top: 30px;
+	text-align: center;
+}
+
+.header2 {
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 400;
+  	color: #F79824;
+  	font-size: 42px;
+}
+
+.songs {
+	width: 300px;
+	height: 300px;
+	overflow: auto;
+	padding: 5px;
+	background-color: #FFBE0B;
+	margin-left: 20%;
+	float: left;
+	position: relative;
+	border-radius: 10px;
+}
+
+.right {
+	width: 300px;
+	height: 300px;
+	position: relative;
+	float: right;
+	margin-right: 20%;
+}
+
+.animation {
+	width: 300px;
+	margin-top: -30px;
+}
+
+.navigate {
+	color: white;
+	background-color: #FFBE0B;
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 400;
+  	font-size: 16px;
+  	display: inline-block;
+  	padding: 4px 12px 4px 12px;
+  	border-radius: 5px;
+  	border: none;
+  	margin: 5px 8px 0px 8px;
+  	transition: box-shadow 0.5s;
+}
+
+.navigate:focus {
+	outline:0;
+	background-color: #ffe494;
+}
+
+.navigate:hover {
+    box-shadow: -5px 5px 0px 0px rgba(153,147,128,0.65);
+}
+
+.song {
+	color: white;
+	background-color: #F79824;
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 400;
+  	font-size: 16px;
+  	display: block;
+  	padding: 7px;
+  	border-radius: 3px;
+  	border: none;
+  	margin: 5px 10px 5px 10px;
+  	margin-bottom: 5px;
+  	margin-left: 10px;
+  	transition: background-color 0.5s;
+}
+
+.song:focus {
+	outline:0;
+	background-color: #CF9F65;
+}
+
+.song:hover {
+	background-color: #CF9F65;
+}
+
+#frequency {
+	width: 300px;
+	height: 300px;
+}

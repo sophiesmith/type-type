@@ -1,0 +1,25 @@
+{
+  "name": "typing-game",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@f/create-action": "^1.1.1",
+    "enroute": "^1.0.1",
+    "firebase": "^4.7.0",
+    "howler": "^2.0.8",
+    "react": "^16.2.0",
+    "react-burger-menu": "^2.2.3",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-redux-firebase": "^1.5.1",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-effects-location": "^0.2.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

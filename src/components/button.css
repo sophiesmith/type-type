@@ -1,0 +1,57 @@
+.main-button {
+	background-color: white;
+	color: #F79824;
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 700;
+  	border: 3px solid #FFBE0B;
+  	padding: 4px 12px 4px 12px;
+  	font-size: 1em;
+  	display: inline-block;
+  	line-height: 20px;
+  	transition: box-shadow 0.5s;
+}
+
+.main-button:hover {
+    box-shadow: -7px 7px 0px 0px rgba(194,188,172,0.65);
+}
+
+.main-button:focus {
+	outline:0;
+	background-color: #ffe494;
+}
+
+.secondary-button {
+	background-color: white;
+	color: #F79824;
+	font-family: 'Lato', sans-serif;
+  	font-style: italic;
+  	border: 3px solid #FFDA73;
+  	padding: 4px 12px 4px 12px;
+  	font-size: 1em;
+  	display: inline-block;
+  	line-height: 20px;
+  	transition: box-shadow 0.5s;
+}
+
+.secondary-button:hover {
+    box-shadow: -5px 5px 0px 0px rgba(153,147,128,0.65);
+}
+
+.secondary-button:focus {
+	outline:0;
+	background-color: #ffe494;
+}
+
+#login {
+	position: relative;
+	margin-top: 50px;
+	float: left;
+	padding: 4px 16px 4px 16px;
+}
+
+#signup {
+	position: relative;
+	margin-top: 50px;
+	float: right;
+}

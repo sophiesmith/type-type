@@ -1,0 +1,69 @@
+.outer3 {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+
+#instructions {
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 400;
+  	color: #ffbe0b;
+  	font-size: 32px;
+  	margin-top: 50px;
+}
+
+.pending {
+	visibility: hidden;
+}
+
+.win {
+	visibility: visible;
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 400;
+  	color: #F79824;
+  	font-size: 32px;
+  	margin-left: 25%;
+  	margin-top: 50px;
+}
+
+/*active: word currently being correctly typed by user*/
+.active {
+	color: #55dd1f;
+}
+
+/*activeWrong: word currently being typed, user has typed it incorrectly*/
+.activeWrong {
+	color: #f73c1b;
+}
+
+/*waiting: word that is visibly waiting to be typed by user*/
+.waiting {
+	color: black;
+	visibility: visible;
+}
+
+/*waitingHidden: word that is waiting to be typed, not yet visible to user*/
+.waitingHidden {
+	visibility: hidden;
+}
+
+/*word that has already been typed by user*/
+.done {
+	color: gray;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	float: left;
+	position: relative;
+	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+  	font-weight: 400;
+  	margin: 5px;
+  	font-size: 30px;
+}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import './Game.css'
+import './Game.css';
 import  {Howl, Howler, playing} from 'howler';
 import {NavBar} from './NavBar';
+import {analyze, guess} from 'web-audio-beat-detector';
+import Pulse from 'pulsejs';
 
 class Game extends Component {
 	constructor(props) {
@@ -10,34 +12,76 @@ class Game extends Component {
 		console.log(props, props.song);
 		this.state = {
 			words: [
-				{word: 'these', active: 'active'}, 
-				{word: 'are', active: 'waiting'},
-				{word: 'words', active: 'waiting'},
-				{word: 'battery', active: 'waiting'},
-				{word: 'villanova', active: 'waiting'},
-				{word: 'confidential', active: 'waitingHidden'},
-				{word: 'susurration', active: 'waitingHidden'},
-				{word: 'scrimshank', active: 'waitingHidden'},
-				{word: 'intercollegiate', active: 'waitingHidden'},
-				{word: 'ethereal', active: 'waitingHidden'},
-				{word: 'treacherous', active: 'waitingHidden'},],
+				{word: 'these', status: 'active', activeLetterIndex: 0}, 
+				{word: 'are', status: 'waiting', activeLetterIndex: 0},
+				{word: 'words', status: 'waiting', activeLetterIndex: 0},
+				{word: 'battery', status: 'waiting', activeLetterIndex: 0},
+				{word: 'villanova', status: 'waiting', activeLetterIndex: 0},
+				{word: 'confidential', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'susurration', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'scrimshank', status: 'waitingHidden', activeLetterIndex: 0},
+				/*{word: 'intercollegiate', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'ethereal', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'treacherous', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'isinglass', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'philately', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'abomination', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'serendipity', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'algorithm', status: 'waitingHidden', activeLetterIndex: 0},*/
+				],
 			song: require(`../music/${props.song}.mp3`),
-			activeWordIndex: 0,
-			activeLetterIndex: 0,
-			lastWordIndex: 4,
+			wordIndex: 0, //the current word
+			lastWordIndex: 4, //the last word that is currently displayed
 			gameProgress: 'pending',
 			songID: 0,
-			music: {}
+			music: {},
+			numErrors: 0,
+			numKeyPresses: 0
 		}
-		window.addEventListener("keypress", this.handleKeyPress);
-		window.setInterval(this.updateWords, 1000);
 	}
 
 	componentWillMount() {
-		let music = new Howl({
+		const music = new Howl({
   			src: [this.state.song],
 		});
 		const songID = music.play();
+
+		/*
+		const pulse = new Pulse({
+  
+    	// when Pulse has finished to compute main data: beat, significant peaks...
+		    onComplete: function(event, pulse) {
+		        const extrapolatedPeaks = pulse.getExtrapolatedPeaks(
+		            pulse.renderedBuffer,
+		            pulse.significantPeaks,
+		            pulse.beat
+		        );
+
+		        // beat (ms and bpm properties)
+		        console.log(pulse.beat);
+
+		        // extrapolated peaks
+		        console.log(extrapolatedPeaks);
+	    	}
+		});
+
+		pulse.loadBufferFromURI(this.state.song);*/
+
+		/*
+		const buffer = Howler.ctx.createBuffer(1, 22050, 44100);
+		guess(buffer)
+	    .then(({ bpm, offset }) => {
+	        // the bpm and offset could be guessed
+	        console.log("here's bpm")
+	        console.log(bpm);
+	    })
+	    .catch((err) => {
+	        // something went wrong
+	        console.log("error!")
+	    });*/
+
+		window.addEventListener("keypress", this.handleKeyPress);
+		window.setInterval(this.updateWords, 1000);
 
 		this.setState({music: music, songID: songID});
 	}
@@ -47,10 +91,6 @@ class Game extends Component {
 	}
 
 	endGame = () => {
-		const instr = document.getElementById('instructions');
-		const game = document.getElementById('game');
-		instr.style.display = "none";
-		game.style.display = "none";
 		this.setState({gameProgress: 'win'});
 	}
 
@@ -60,67 +100,112 @@ class Game extends Component {
 		}
 		let words = this.state.words;
 		let last = this.state.lastWordIndex;
-		console.log(last);
 		if (last < words.length-1) {
 			last++;
 		}
-		words[last].active = 'waiting';
-		if (this.state.activeWordIndex === last) {
-			words[last].active = 'active';
+		words[last].status = 'waiting';
+		if (this.state.wordIndex === last) {
+			words[last].status = 'active';
 		}
 		this.setState({words: words, lastWordIndex: last});
 	}
 
-	handleKeyPress = (e) => {
-		let words = this.state.words;
-		let wordIndex = this.state.activeWordIndex;
-		let letterIndex = this.state.activeLetterIndex;
-		let curr = words[wordIndex].word;
-
-		if (e.key === curr[letterIndex]) {
-			console.log("yeet");
-			letterIndex++;
-			words[wordIndex].active = 'active';
-			if (letterIndex === curr.length) {
-				console.log("next word");
-				words[wordIndex].active = 'done';
-				wordIndex++;
-				if (wordIndex === words.length) {
-					wordIndex--;
-					this.endGame();
+	setNextWord = () => {
+		const {words, wordIndex} = this.state
+		this.setState({
+			wordIndex: wordIndex + 1,
+			words: words.map((word, i) => {
+				if (i === wordIndex) {
+					return {...word, status: 'done'}
 				}
-				let newLI = 0;
-				words[wordIndex].active = 'active';
+				if (i === wordIndex + 1) {
+					return {...word, status: 'active'}
+				}
+				return word
+			})
+		})
+	}
 
-				this.setState({words: words, activeWordIndex: wordIndex, activeLetterIndex: newLI});
+	incrementLetterIndex = () => {
+		const {words, wordIndex, numKeyPresses} = this.state
+		this.setState({
+			words: words.map((word, i) => (
+				i === wordIndex
+					? {...word, status: 'active', activeLetterIndex: word.activeLetterIndex + 1}
+					: word
+				)
+			),
+			numKeyPresses: numKeyPresses + 1
+		})
+	}
+
+	setWrong = () => {
+		const {words, wordIndex, numErrors, numKeyPresses} = this.state
+		this.setState({
+			words: words.map((word, i) => (
+				i === wordIndex
+					? {...word, status: 'activeWrong'}
+					: word
+				)
+			), 
+			numErrors: numErrors + 1,
+			numKeyPresses: numKeyPresses + 1
+		})
+	}
+
+	handleKeyPress = (e) => {
+		let {words, wordIndex, gameProgress} = this.state
+		console.log(words[wordIndex])
+		let curr = words[wordIndex].word;
+		let letterIndex = words[wordIndex].activeLetterIndex;
+		if (gameProgress === 'pending') {
+			if (e.key === curr[letterIndex]) {
+				console.log("yeet")
+				if (letterIndex === curr.length-1) {
+					console.log("next word");
+					if (wordIndex === words.length-1) {
+						return this.endGame();
+					}
+					this.setNextWord()
+				} else {
+					this.incrementLetterIndex()
+				}
 			} else {
-				this.setState({words: words, activeLetterIndex: letterIndex});
+				console.log("no")
+				this.setWrong()
 			}
-		} else {
-			words[wordIndex].active = 'activeWrong';
-			this.setState({words: words});
 		}
 	}
 
 	render() {
 
-		let words = this.state.words;
+		const {words, numErrors, numKeyPresses} = this.state
 
 		return (
 			<div>
 				<NavBar/>
 				<div className="outer3">
-				<h1 id="instructions">type the words as they appear on screen!</h1>
+				{this.state.gameProgress !== 'win' && (<h1 id="instructions">type the words as they appear on screen!
+					</h1>)}
 				
 				<div className={this.state.gameProgress}>
 					<p>You won!!!! nice</p>
+					<p>Your accuracy is {(1 - numErrors/numKeyPresses).toFixed(2) * 100}%</p>
+				
 				</div>
-
-				<ul id="game">
-					{words.map((word, i) => (
-						<li className={word.active} key={i}>{word.word}</li>
-					))}
-				</ul>
+				{this.state.gameProgress !== 'win' && (
+					<ul id="game">
+						{words.map((word, i) => (
+							<li className={word.status} key={i}>{
+								word.word.split('').map((letter, i) => (
+									i === word.activeLetterIndex && (word.status === 'active' || word.status === 'activeWrong')
+										? <span className='activeLetter'>{letter}</span>
+										: <span>{letter}</span>
+								))
+							}</li>
+						))}
+					</ul>)
+				}
 				</div>
 
 			</div>

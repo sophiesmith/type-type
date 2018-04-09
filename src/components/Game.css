@@ -24,7 +24,6 @@
   	font-weight: 400;
   	color: #F79824;
   	font-size: 32px;
-  	margin-left: 25%;
   	margin-top: 50px;
 }
 
@@ -49,6 +48,10 @@
 	visibility: hidden;
 }
 
+.activeLetter {
+	color: blue;
+}
+
 /*word that has already been typed by user*/
 .done {
 	color: gray;
@@ -65,5 +68,5 @@ li {
  	font-style: italic;
   	font-weight: 400;
   	margin: 5px;
-  	font-size: 30px;
+  	font-size: 36px;
 }

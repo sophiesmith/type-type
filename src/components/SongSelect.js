@@ -19,7 +19,9 @@ class SongSelect extends Component {
 	}
 
 	componentWillUnmount() {
-		this.state.music.stop(this.state.songID);
+		if (this.state.songID !== 0) {
+			this.state.music.stop(this.state.songID);
+		}
 	}
 
 

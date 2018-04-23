@@ -6,6 +6,7 @@ import App from '../components/App'
 import Difficulty from '../components/Difficulty'
 import SongSelect from '../components/SongSelect'
 import Game from '../components/Game'
+import Profile from '../components/Profile'
 import  {Howl, Howler} from 'howler';
 
 
@@ -23,11 +24,9 @@ const router = enroute({
   	'/play/:song': (params, props) => (
   		<Game song={params.song}/>
   	),
-  	/*'/u/:user': (props, params) => (
-	    <App>
-	      
-	    </App>
-  	),*/
+  	'/u/:user': (params, props) => (
+	      <Profile user={params.user}/>
+  	),
 })
 
 class AppRouter extends Component {

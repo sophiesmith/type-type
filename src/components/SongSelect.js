@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import * as songs from '../music/index.js'
 import  {Howl, Howler} from 'howler';
 import {Canvas} from './Canvas';
-import {NavBar} from './NavBar';
+import NavBar from './NavBar';
 
 class SongSelect extends Component {
 	constructor(props) {

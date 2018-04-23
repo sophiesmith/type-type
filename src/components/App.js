@@ -4,7 +4,7 @@ import './button.css'
 import {Button} from './Button'
 import {setUrl} from 'redux-effects-location'
 import {connect} from 'react-redux'
-import {NavBar} from './NavBar';
+import NavBar from './NavBar';
 
 class App extends Component {
   render() {

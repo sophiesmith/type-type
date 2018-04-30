@@ -80,7 +80,7 @@ thought::: what if animation time was length of song*/
 
 ul {
 	list-style-type: none;
-
+	display: inline-flex;
 }
 
 .word {

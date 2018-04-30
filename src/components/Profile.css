@@ -6,7 +6,7 @@
 }
 
 .pic {
-	height: 150px;
+	width: 80px;
 	border-radius: 20px;
 	float: left;
 }
@@ -28,10 +28,30 @@
 .intro {
 	padding: 20px;
 	margin-top: 30px;
-	height: 180px;
+	height: 130px;
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 	border: 2px solid #F79824;
 	border-radius: 20px;
+	transition: box-shadow 0.5s;
+}
+
+.stats {
+	padding: 20px;
+	margin-top: 30px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #33A1FD;
+	border-radius: 20px;
+	transition: box-shadow 0.5s;
+}
+
+.stats:hover {
+	box-shadow: -5px 5px #C2BCAC;
+}
+
+.intro:hover {
+	box-shadow: -5px 5px #C2BCAC;
 }

@@ -1,8 +1,8 @@
-
 .outer3 {
 	width: 80%;
 	margin: auto;
 	text-align: center;
+	overflow: hidden;
 }
 
 #instructions {
@@ -73,9 +73,9 @@ thought::: what if animation time was length of song*/
 	-webkit-transform:translateX(100%); 
 	transform:translateX(100%);
 	/* Apply animation to this element */ 
-	-moz-animation: scroll-left 10s linear infinite;
-	-webkit-animation: scroll-left 10s linear infinite;
-	animation: scroll-left 10s linear infinite;
+	-moz-animation: scroll-left 15s linear infinite;
+	-webkit-animation: scroll-left 15s linear infinite;
+	animation: scroll-left 15s linear infinite;
 }
 
 ul {
@@ -97,12 +97,12 @@ ul {
 /* Move it (define the animation) */
 @-moz-keyframes scroll-left {
 0% { -moz-transform: translateX(100%); }
-100% { -moz-transform: translateX(-100%); }
+100% { -moz-transform: translateX(-500%); }
 }
 
 @-webkit-keyframes scroll-left {
 0% { -webkit-transform: translateX(100%); }
-100% { -webkit-transform: translateX(-100%); }
+100% { -webkit-transform: translateX(-500%); }
 }
 
 @keyframes scroll-left {
@@ -112,8 +112,8 @@ ul {
 transform: translateX(100%); 
 }
 100% { 
--moz-transform: translateX(-100%); /* Browser bug fix */
--webkit-transform: translateX(-100%); /* Browser bug fix */
-transform: translateX(-100%); 
+-moz-transform: translateX(-500%); /* Browser bug fix */
+-webkit-transform: translateX(-500%); /* Browser bug fix */
+transform: translateX(-500%); 
 }
 }

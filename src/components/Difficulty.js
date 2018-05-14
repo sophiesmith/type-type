@@ -11,7 +11,7 @@ class Difficulty extends Component {
 			<div>
 				<NavBar/>
 				<div className="outer">
-				<h1 className="header">what's your speed?</h1>
+				<h1 className="header2">what's your speed?</h1>
 				<div className="buttons">
 					<Button type="option" text="novice" handleClick={() => this.props.setUrl('/songselect')}/>
 					<Button type="option" text="apprentice" handleClick={() => this.props.setUrl('/songselect')}/>

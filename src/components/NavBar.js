@@ -7,7 +7,7 @@ class NavBar extends Component {
 	render() {
 		return (
 			
-				<ul>
+				<ul className="nav">
 					<li className="link" onClick={() => this.props.setUrl('/')}>Home</li>
 					<li className="link" onClick={() => this.props.setUrl('/u/username')}>Profile</li>
 					<li className="link" onClick={() => this.props.setUrl('/')}>About</li>

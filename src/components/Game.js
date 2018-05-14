@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './Game.css';
 import  {Howl, Howler, playing} from 'howler';
-import {NavBar} from './NavBar';
+import NavBar from './NavBar';
 import {analyze, guess} from 'web-audio-beat-detector';
 import Pulse from 'pulsejs';
 
 class Game extends Component {
 	constructor(props) {
 		super(props);
-		console.log("here's the props")
-		console.log(props, props.song);
 		this.state = {
 			words: [
 				{word: 'these', status: 'active', activeLetterIndex: 0}, 
@@ -20,14 +18,14 @@ class Game extends Component {
 				{word: 'confidential', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'susurration', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'scrimshank', status: 'waitingHidden', activeLetterIndex: 0},
-				/*{word: 'intercollegiate', status: 'waitingHidden', activeLetterIndex: 0},
+				{word: 'intercollegiate', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'ethereal', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'treacherous', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'isinglass', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'philately', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'abomination', status: 'waitingHidden', activeLetterIndex: 0},
 				{word: 'serendipity', status: 'waitingHidden', activeLetterIndex: 0},
-				{word: 'algorithm', status: 'waitingHidden', activeLetterIndex: 0},*/
+				{word: 'algorithm', status: 'waitingHidden', activeLetterIndex: 0},
 				],
 			song: require(`../music/${props.song}.mp3`),
 			wordIndex: 0, //the current word
@@ -95,6 +93,7 @@ class Game extends Component {
 	}
 
 	updateWords = () => {
+		//maybe can move words up in this function?
 		if (!(this.state.music.playing(this.state.songID))) {
 			return;
 		}
@@ -196,13 +195,14 @@ class Game extends Component {
 				{this.state.gameProgress !== 'win' && (
 					<ul id="game">
 						{words.map((word, i) => (
-							<li className={word.status} key={i}>{
+							<div className="word"><li className={word.status} key={i}>{
 								word.word.split('').map((letter, i) => (
 									i === word.activeLetterIndex && (word.status === 'active' || word.status === 'activeWrong')
 										? <span className='activeLetter'>{letter}</span>
 										: <span>{letter}</span>
 								))
-							}</li>
+							}</li><br/>
+							</div>
 						))}
 					</ul>)
 				}

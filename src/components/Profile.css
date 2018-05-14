@@ -1,0 +1,57 @@
+.wrap {
+	width: 80%;
+  	margin: auto;
+  	font-family: 'Lato', sans-serif;
+ 	font-style: italic;
+}
+
+.pic {
+	width: 80px;
+	border-radius: 20px;
+	float: left;
+}
+
+.header {
+  	margin-left: 110px;
+  	margin-top: 0px;
+  	font-weight: 400;
+  	color: #F79824;
+  	font-size: 36px;
+}
+
+.bio {
+	float: left;
+	margin-left: 30px;
+	margin-top: 0px;
+}
+
+.intro {
+	padding: 20px;
+	margin-top: 30px;
+	height: 130px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #F79824;
+	border-radius: 20px;
+	transition: box-shadow 0.5s;
+}
+
+.stats {
+	padding: 20px;
+	margin-top: 30px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #33A1FD;
+	border-radius: 20px;
+	transition: box-shadow 0.5s;
+}
+
+.stats:hover {
+	box-shadow: -5px 5px #C2BCAC;
+}
+
+.intro:hover {
+	box-shadow: -5px 5px #C2BCAC;
+}

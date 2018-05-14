@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import './NavBar.css';
+import {setUrl} from 'redux-effects-location';
+import {connect} from 'react-redux';
 
-export class NavBar extends Component {
+class NavBar extends Component {
 	render() {
 		return (
 			
 				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="/">Profile</a></li>
-					<li><a href="/">About</a></li>
+					<li className="link" onClick={() => this.props.setUrl('/')}>Home</li>
+					<li className="link" onClick={() => this.props.setUrl('/u/username')}>Profile</li>
+					<li className="link" onClick={() => this.props.setUrl('/')}>About</li>
 				</ul>
 			
 		);
 	}
 }
+
+export default connect(() => {}, {setUrl})(NavBar);

@@ -2,6 +2,7 @@
 	width: 80%;
 	margin: auto;
 	text-align: center;
+	overflow: hidden;
 }
 
 #instructions {
@@ -27,7 +28,8 @@
   	margin-top: 50px;
 }
 
-/*active: word currently being correctly typed by user*/
+/*active: word currently being correctly typed by user
+thought::: what if animation time was length of song*/
 .active {
 	color: #55dd1f;
 }
@@ -57,16 +59,61 @@
 	color: gray;
 }
 
-ul {
-	list-style-type: none;
+#game {
+	font-size: 56px;
+	z-index: 10;
+	width: 850px;
+	margin-top: -50px;
+	/*animation: slide-top 180s;*/
+	height: 80px; 
+	overflow: visible;
+	position: relative;
+	/* Starting position */
+	-moz-transform:translateX(100%);
+	-webkit-transform:translateX(100%); 
+	transform:translateX(100%);
+	/* Apply animation to this element */ 
+	-moz-animation: scroll-left 15s linear infinite;
+	-webkit-animation: scroll-left 15s linear infinite;
+	animation: scroll-left 15s linear infinite;
 }
 
-li {
+ul {
+	list-style-type: none;
+	display: inline-flex;
+}
+
+.word {
 	float: left;
 	position: relative;
 	font-family: 'Lato', sans-serif;
  	font-style: italic;
   	font-weight: 400;
-  	margin: 5px;
-  	font-size: 36px;
+  	margin-right: 20px;
+}
+
+
+
+/* Move it (define the animation) */
+@-moz-keyframes scroll-left {
+0% { -moz-transform: translateX(100%); }
+100% { -moz-transform: translateX(-500%); }
+}
+
+@-webkit-keyframes scroll-left {
+0% { -webkit-transform: translateX(100%); }
+100% { -webkit-transform: translateX(-500%); }
+}
+
+@keyframes scroll-left {
+0% { 
+-moz-transform: translateX(100%); /* Browser bug fix */
+-webkit-transform: translateX(100%); /* Browser bug fix */
+transform: translateX(100%); 
+}
+100% { 
+-moz-transform: translateX(-500%); /* Browser bug fix */
+-webkit-transform: translateX(-500%); /* Browser bug fix */
+transform: translateX(-500%); 
+}
 }
